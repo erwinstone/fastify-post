@@ -1,0 +1,34 @@
+{
+	"name": "fastify-post",
+	"version": "1.0.0",
+	"description": "A module for Fastify to parse x-www-form-urlencoded or multipart/form-data bodies",
+	"main": "post.js",
+	"types": "post.d.ts",
+	"repository": "git@github.com:erwinstone/fastify-post.git",
+	"author": "Erwin Stone <erwinstone@pm.me>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/erwinstone/fastify-post/issues"
+	},
+	"homepage": "https://github.com/erwinstone/fastify-post#readme",
+	"keywords": [
+		"fastify",
+		"x-www-form-urlencoded",
+		"multipart/form-data",
+		"fastify-post",
+		"fastify post",
+		"fastify body",
+		"fastify multipart",
+		"fastify upload"
+	],
+	"dependencies": {
+		"fastify-plugin": "^4.0.0",
+		"formidable": "^2.0.1"
+	},
+	"devDependencies": {
+		"fastify": "^4.3.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
