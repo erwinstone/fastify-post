@@ -1,13 +1,18 @@
 import { FastifyPlugin } from 'fastify'
-import { File, Files } from 'formidable'
 
 export interface FastifyPostOptions {
   bodyLimit?: number
-  maxFileSize?: number
+  maxFields?: number
+  maxFilesSize?: number
+}
+
+export interface File {
+  fileName: string
+  fileMime: string
+  filePath: string
+  fileSize: number
 }
 
 declare const fastifyPost: FastifyPlugin<FastifyPostOptions>
 
 export default fastifyPost
-
-export { File, Files }
