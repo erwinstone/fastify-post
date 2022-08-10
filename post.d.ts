@@ -1,4 +1,4 @@
-import { FastifyPlugin } from 'fastify'
+import { FastifyPluginCallback } from 'fastify'
 
 export interface FastifyPostOptions {
   bodyLimit?: number
@@ -13,6 +13,6 @@ export interface File {
   fileSize: number
 }
 
-declare const fastifyPost: FastifyPlugin<FastifyPostOptions>
+declare const fastifyPost: FastifyPluginCallback<FastifyPostOptions>
 
 export default fastifyPost
