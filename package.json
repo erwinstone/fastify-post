@@ -1,6 +1,6 @@
 {
   "name": "fastify-post",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A module for Fastify to parse x-www-form-urlencoded or multipart/form-data bodies",
   "main": "post.js",
   "types": "post.d.ts",
@@ -22,11 +22,11 @@
     "fastify upload"
   ],
   "dependencies": {
-    "fastify-plugin": "^4.0.0",
+    "fastify-plugin": "^4.1.0",
     "multiparty": "^4.2.3"
   },
   "devDependencies": {
-    "fastify": "^4.3.0"
+    "fastify": "^4.4.0"
   },
   "publishConfig": {
     "access": "public"
