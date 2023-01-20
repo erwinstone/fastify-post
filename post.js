@@ -36,6 +36,9 @@ function fastifyPost(fastify, options, next) {
           } else {
             files[key] = val.map((i) => fileFormat(i))
           }
+          if (options.stringify === true) {
+            files[key] = JSON.stringify(files[key])
+          }
         }
         done(null, { ...fields, ...files })
       }

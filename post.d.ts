@@ -4,6 +4,7 @@ export interface FastifyPostOptions {
   bodyLimit?: number
   maxFields?: number
   maxFilesSize?: number
+  stringify?: boolean
 }
 
 export interface File {
