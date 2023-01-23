@@ -5,6 +5,7 @@ export interface FastifyPostOptions {
   maxFields?: number
   maxFilesSize?: number
   stringify?: boolean
+  detectMime?: boolean
 }
 
 export interface File {
@@ -12,6 +13,7 @@ export interface File {
   fileMime: string
   filePath: string
   fileSize: number
+  fileExts: number
 }
 
 declare const fastifyPost: FastifyPluginCallback<FastifyPostOptions>

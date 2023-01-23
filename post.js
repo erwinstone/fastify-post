@@ -1,5 +1,6 @@
 'use strict'
 
+const path = require('path')
 const fp = require('fastify-plugin')
 const { parse } = require('querystring')
 const multiparty = require('multiparty')
@@ -19,7 +20,7 @@ function fastifyPost(fastify, options, next) {
       maxFields: options.maxFields || 1000,
       maxFilesSize: options.maxFilesSize || 100 * 1024 * 1024, //100MB
     })
-    form.parse(body, (err, fields, files) => {
+    form.parse(body, async (err, fields, files) => {
       if (err) {
         done(err)
       } else {
@@ -32,9 +33,9 @@ function fastifyPost(fastify, options, next) {
         for (const key of Object.keys(files)) {
           const val = files[key]
           if (val.length === 1) {
-            files[key] = fileFormat(val[0])
+            files[key] = await fileFormat(val[0], options.detectMime)
           } else {
-            files[key] = val.map((i) => fileFormat(i))
+            files[key] = await Promise.all(val.map((i) => fileFormat(i, options.detectMime)))
           }
           if (options.stringify === true) {
             files[key] = JSON.stringify(files[key])
@@ -47,13 +48,24 @@ function fastifyPost(fastify, options, next) {
   next()
 }
 
-function fileFormat(file) {
+async function fileFormat(file, detectMime) {
   if (file.size === 0) return null
+  let fileMime = file.headers['content-type']
+  let fileExts = path.parse(file.path).ext.substring(1)
+  if (detectMime === true) {
+    const { fileTypeFromFile } = await import('file-type')
+    const fileType = await fileTypeFromFile(file.path)
+    if (fileType !== undefined) {
+      fileMime = fileType.mime
+      fileExts = fileType.ext
+    }
+  }
   return {
     fileName: file.originalFilename,
-    fileMime: file.headers['content-type'],
+    fileMime,
     filePath: file.path,
     fileSize: file.size,
+    fileExts: fileExts.toLowerCase(),
   }
 }
 
