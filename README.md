@@ -3,6 +3,8 @@
 A simple plugin for [Fastify][fastify] that adds a content type parser for
 the content type `application/x-www-form-urlencoded` or `multipart/form-data`.
 
+**This package is a ESM package. Your project needs to be ESM too. [Read more](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).**
+
 [fastify]: https://www.fastify.io/
 
 ## Usage/Examples

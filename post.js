@@ -1,9 +1,10 @@
 'use strict'
 
-const path = require('path')
-const fp = require('fastify-plugin')
-const { parse } = require('querystring')
-const multiparty = require('multiparty')
+import path from 'path'
+import fp from 'fastify-plugin'
+import { parse } from 'querystring'
+import multiparty from 'multiparty'
+import { fileTypeFromFile } from 'file-type'
 
 function fastifyPost(fastify, options, next) {
   const bodyLimit = options.bodyLimit || fastify.initialConfig.bodyLimit
@@ -53,7 +54,6 @@ async function fileFormat(file, detectMime) {
   let fileMime = file.headers['content-type']
   let fileExts = path.parse(file.path).ext.substring(1)
   if (detectMime === true) {
-    const { fileTypeFromFile } = await import('file-type')
     const fileType = await fileTypeFromFile(file.path)
     if (fileType !== undefined) {
       fileMime = fileType.mime
@@ -69,7 +69,7 @@ async function fileFormat(file, detectMime) {
   }
 }
 
-module.exports = fp(fastifyPost, {
+export default fp(fastifyPost, {
   fastify: '4.x',
   name: 'fastify-post',
 })
